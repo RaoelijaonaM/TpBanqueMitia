@@ -32,6 +32,7 @@ public class CompteBancaire implements Serializable {
     public String getNom() {
         return nom;
     }
+
     /**
      * Set the value of nom
      *
@@ -40,6 +41,7 @@ public class CompteBancaire implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
     /**
      * Get the value of solde
      *
@@ -48,6 +50,7 @@ public class CompteBancaire implements Serializable {
     public int getSolde() {
         return solde;
     }
+
     /**
      * Set the value of solde
      *
@@ -59,6 +62,23 @@ public class CompteBancaire implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public CompteBancaire(int solde, String nom) {
+        this.solde = solde;
+        this.nom = nom;
+    }
+    public CompteBancaire(){}
+    public void deposer(int montant) {
+        solde += montant;
+    }
+
+    public void retirer(int montant) {
+        if (montant < solde) {
+            solde -= montant;
+        } else {
+            solde = 0;
+        }
     }
 
     @Override
