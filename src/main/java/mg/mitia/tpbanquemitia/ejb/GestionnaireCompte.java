@@ -32,7 +32,7 @@ import mg.mitia.tpbanquemitia.entities.CompteBancaire;
 @Stateless
 public class GestionnaireCompte {
 
-    @PersistenceContext(unitName = "banquePU")
+    @PersistenceContext
     private EntityManager em;
 
     public void creerCompte(CompteBancaire c) {
@@ -40,7 +40,7 @@ public class GestionnaireCompte {
     }
 
     public List<CompteBancaire> getAllComptes() {
-        TypedQuery<CompteBancaire> query = em.createNamedQuery("CompteBancaire.findAll", CompteBancaire.class);
+        TypedQuery query = em.createQuery("SELECT c FROM CompteBancaire c", CompteBancaire.class);
         return query.getResultList();
     }
     public long nbComptes(){
