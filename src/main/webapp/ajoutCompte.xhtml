@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/template_defaut.xhtml">
+
+            <ui:define name="top">
+                Ajouter un nouveau compte
+            </ui:define>
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form id="ajout">
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nom:" for="nom" />
+                            <p:inputText id="nom" value="#{ajoutCompteMBean.nom}" title="Nom" />
+                            <p:outputLabel value="Montant:" for="montant" />
+                            <p:inputText id="montant" value="#{ajoutCompteMBean.montant}" title="Montant" />
+                            <h:message for="montant" errorStyle="color:red"/>
+                        </p:panelGrid>
+                         <h:commandButton value="Insérer" action="#{ajoutCompteMBean.insererCompte()}"/>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
