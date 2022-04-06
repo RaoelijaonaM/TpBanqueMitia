@@ -51,6 +51,14 @@ public class GestionnaireCompte {
     public CompteBancaire update(CompteBancaire cb) {
        return em.merge(cb);
     }
+    public void retraitArgent(CompteBancaire cb, int montant){
+        cb.retirer(montant);
+        update(cb);
+    }
+     public void ajoutArgent(CompteBancaire cb, int montant){
+       cb.deposer(montant);
+       update(cb);
+    }
     public CompteBancaire getCompteById(long idCompte){
        return em.find(CompteBancaire.class,idCompte);
     }
