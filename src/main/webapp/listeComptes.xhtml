@@ -17,6 +17,7 @@
             <ui:define name="content">
                 <f:view>
                     <h:form>
+
                         <p:dataTable value="#{listeComptes.allComptes}" var="item">
                             <p:column>
                                 <f:facet name="header">
@@ -38,9 +39,8 @@
                             </p:column>
                         </p:dataTable>
                     </h:form>
-
-
-                    <h:messages/>
+                    <h:messages globalOnly="true" infoStyle="color: green;"
+                                errorStyle="display: none;"/>
                 </f:view>
 
             </ui:define>

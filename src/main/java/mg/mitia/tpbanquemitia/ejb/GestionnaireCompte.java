@@ -9,6 +9,7 @@ import javax.annotation.sql.DataSourceDefinition;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import mg.mitia.tpbanquemitia.entities.CompteBancaire;
 
@@ -47,4 +48,17 @@ public class GestionnaireCompte {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM CompteBancaire c", Long.class);
         return query.getSingleResult();
     }
+    public CompteBancaire update(CompteBancaire cb) {
+       return em.merge(cb);
+    }
+    public CompteBancaire getCompteById(long idCompte){
+       return em.find(CompteBancaire.class,idCompte);
+    }
+   public void transfertArgent(CompteBancaire destinataire, CompteBancaire destination, int montant){
+       destinataire.retirer(montant);
+       destination.deposer(montant);
+       update(destinataire);
+       update(destination);
+       
+   }
 }
