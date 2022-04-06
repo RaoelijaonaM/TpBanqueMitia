@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import mg.mitia.tpbanquemitia.ejb.GestionnaireCompte;
 import mg.mitia.tpbanquemitia.entities.CompteBancaire;
+import mg.mitia.tpbanquemitia.util.Util;
 
 /**
  *
@@ -21,6 +22,7 @@ import mg.mitia.tpbanquemitia.entities.CompteBancaire;
 public class ListeComptes implements Serializable {
     @EJB
     private GestionnaireCompte gestionnaireCompte;
+    
     /**
      * Creates a new instance of ListeComptes
      */
@@ -28,5 +30,10 @@ public class ListeComptes implements Serializable {
     }
     public List<CompteBancaire> getAllComptes(){
         return gestionnaireCompte.getAllComptes();
+    }
+    public String supprimerCompte(CompteBancaire cb){
+        gestionnaireCompte.deleteCompte(cb);
+        Util.addFlashInfoMessage("Compte supprimé");
+        return "listeComptes?faces-redirect=true";
     }
 }

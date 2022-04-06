@@ -44,29 +44,38 @@ public class GestionnaireCompte {
         TypedQuery query = em.createQuery("SELECT c FROM CompteBancaire c", CompteBancaire.class);
         return query.getResultList();
     }
-    public long nbComptes(){
+
+    public long nbComptes() {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM CompteBancaire c", Long.class);
         return query.getSingleResult();
     }
+
     public CompteBancaire update(CompteBancaire cb) {
-       return em.merge(cb);
+        return em.merge(cb);
     }
-    public void retraitArgent(CompteBancaire cb, int montant){
+
+    public CompteBancaire getCompteById(long idCompte) {
+        return em.find(CompteBancaire.class, idCompte);
+    }
+
+    public void transfertArgent(CompteBancaire destinataire, CompteBancaire destination, int montant) {
+        destinataire.retirer(montant);
+        destination.deposer(montant);
+        update(destinataire);
+        update(destination);
+
+    }
+
+    public void retraitArgent(CompteBancaire cb, int montant) {
         cb.retirer(montant);
         update(cb);
     }
-     public void ajoutArgent(CompteBancaire cb, int montant){
-       cb.deposer(montant);
-       update(cb);
+
+    public void ajoutArgent(CompteBancaire cb, int montant) {
+        cb.deposer(montant);
+        update(cb);
     }
-    public CompteBancaire getCompteById(long idCompte){
-       return em.find(CompteBancaire.class,idCompte);
+    public void deleteCompte(CompteBancaire cb){
+        em.remove(em.merge(cb));
     }
-   public void transfertArgent(CompteBancaire destinataire, CompteBancaire destination, int montant){
-       destinataire.retirer(montant);
-       destination.deposer(montant);
-       update(destinataire);
-       update(destination);
-       
-   }
 }
